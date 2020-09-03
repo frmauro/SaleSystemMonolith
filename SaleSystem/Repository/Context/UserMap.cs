@@ -13,6 +13,8 @@ namespace SaleSystem.Repository.Context
         {
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Name);
+            entityBuilder.Property(t => t.Email);
+            entityBuilder.Property(t => t.Password);
             entityBuilder.Property(t => t.Status);
             entityBuilder.Property(t => t.Type);
         }

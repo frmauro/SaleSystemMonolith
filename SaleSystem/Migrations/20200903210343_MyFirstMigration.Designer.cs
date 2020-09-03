@@ -10,7 +10,7 @@ using SaleSystem.Repository.Context;
 namespace SaleSystem.Migrations
 {
     [DbContext(typeof(SaleContext))]
-    [Migration("20200902215727_MyFirstMigration")]
+    [Migration("20200903210343_MyFirstMigration")]
     partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,13 @@ namespace SaleSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")

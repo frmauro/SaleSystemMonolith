@@ -1,8 +1,40 @@
-﻿
+﻿@model CreateUserViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create User</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label for="txtName">Name</label>
+        <input  asp-for="Name" type="text" class="form-control" id="txtName" >
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">e-mail</label>
+        <input asp-for="Email" type="text" class="form-control" id="txtEmail" >
+    </div>
+    <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input asp-for="Password" type="password" class="form-control" id="txtPassword" >
+    </div>
+    <div class="form-group">
+        <label for="cbType">Type</label>
+        <select  asp-for="Type" class="form-control" id="cbType">
+            <option>Administrator</option>
+            <option>Client</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="cbStatus">Status</label>
+        <select asp-for="Status" class="form-control" id="cbStatus">
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
 
