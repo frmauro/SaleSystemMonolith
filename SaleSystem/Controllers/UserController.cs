@@ -87,16 +87,42 @@ namespace SaleSystem.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var vm = new EditUserViewModel();
+            var user = repository.Get(id);
+            vm.Id = user.Id;
+            vm.Name = user.Name;
+            vm.Email = user.Email;
+            vm.Password = user.Password;
+            vm.Status = user.Status.ToString();
+            vm.Type = user.Type.ToString();
+
+            return View(vm);
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, EditUserViewModel model)
         {
             try
             {
+                var user = repository.Get(id);
+
+                user.Name = model.Name;
+                user.Email = model.Email;
+                user.Password = model.Password;
+
+                if (model.Type == "Administrator")
+                    user.Type = TypeUser.Administrator;
+                else
+                    user.Type = TypeUser.Client;
+
+                if (model.Status == "Active")
+                    user.Status = UserStatus.Active;
+                else
+                    user.Status = UserStatus.Inactive;
+
+                this.repository.Update(user);
                 return RedirectToAction(nameof(Index));
             }
             catch

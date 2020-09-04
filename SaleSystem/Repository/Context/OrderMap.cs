@@ -17,6 +17,8 @@ namespace SaleSystem.Repository.Context
             entityBuilder.Property(t => t.ChangeDate);
             entityBuilder.Property(t => t.Status);
             entityBuilder.Property(t => t.ChangeDate);
+            entityBuilder.HasOne(e => e.User).WithMany(e => e.Orders).HasForeignKey(e => e.Id);
+
         }
     }
 }

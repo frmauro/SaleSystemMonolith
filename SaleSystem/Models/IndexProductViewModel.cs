@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace SaleSystem.Entities.Product
+namespace SaleSystem.Models
 {
-    public class Product : EntityBase
+    public class IndexProductViewModel
     {
+        public int Id { get; set; }
         public virtual string Description { get; set; }
         public virtual int Amount { get; set; }
-        public virtual ProductStatus Status { get; set; }
+        public virtual string Status { get; set; }
+
 
     }
 }

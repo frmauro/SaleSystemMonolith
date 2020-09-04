@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SaleSystem.Entities.User
+namespace SaleSystem.Models
 {
-    public class User : EntityBase
+    public class EditUserViewModel
     {
+        public int Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
-        public virtual TypeUser Type { get; set; }
-        public virtual UserStatus Status { get; set; }
-        public virtual IList<Order.Order> Orders { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Status { get; set; }
+
     }
 }

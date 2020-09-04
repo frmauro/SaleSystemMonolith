@@ -1,8 +1,29 @@
-﻿
+﻿@model EditProductViewModel
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Edit Product</h1>
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label for="txtName">Description</label>
+        <input asp-for="Description" type="text" class="form-control" id="txtDescription">
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">Amount</label>
+        <input asp-for="Amount" type="text" class="form-control" id="txtAmount">
+    </div>
+    <div class="form-group">
+        <label for="cbStatus">Status</label>
+        <select asp-for="Status" class="form-control" id="cbStatus">
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
 

@@ -12,5 +12,6 @@ namespace SaleSystem.Entities.Order
         public virtual DateTime ChangeDate { get; set; }
         public virtual IList<Item> Itens { get; set; }
         public virtual OrderStatus Status { get; set; }
+        public virtual User.User User { get; set; }
     }
 }
