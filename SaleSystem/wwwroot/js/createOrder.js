@@ -13,6 +13,7 @@
            
         },
         products: [],
+        productsSelected: [],
         idsProductsSelected: [],
         getProductsSelected: function () {
 
@@ -25,7 +26,16 @@
                 }
             }
 
+            this.products.map(product => {
+                this.idsProductsSelected.map(idProduct => {
+                    if (product.id === parseInt(idProduct)) {
+                        this.productsSelected.push(product);
+                    }
+                });
+            });
 
+
+            console.log(this.productsSelected);
 
         }
     }
