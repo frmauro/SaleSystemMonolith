@@ -4,11 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SaleSystem.Entities.Order;
+using SaleSystem.Models;
+using SaleSystem.Repository;
 
 namespace SaleSystem.Controllers
 {
     public class OrderController : Controller
     {
+
+        private IRepository<Order> repository;
+
+        public OrderController(IRepository<Order> repository)
+        {
+            this.repository = repository;
+        }
+
         // GET: OrderController
         public ActionResult Index()
         {
@@ -24,7 +35,8 @@ namespace SaleSystem.Controllers
         // GET: OrderController/Create
         public ActionResult Create()
         {
-            return View();
+            var vm = new CreateOrderViewModel();
+            return View(vm);
         }
 
         // POST: OrderController/Create

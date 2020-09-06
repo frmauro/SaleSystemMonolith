@@ -8,11 +8,11 @@ namespace SaleSystem.Models
     public class IndexUserViewModel
     {
         public int Id { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Email { get; set; }
-        public virtual string Password { get; set; }
-        public virtual string Type { get; set; }
-        public virtual string Status { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Type { get; set; }
+        public string Status { get; set; }
 
     }
 }

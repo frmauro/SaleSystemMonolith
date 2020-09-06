@@ -1,8 +1,91 @@
-﻿
+﻿@model CreateOrderViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create Order</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label for="txtName">Description</label>
+        <input asp-for="Description" type="text" class="form-control" id="txtDescription">
+    </div>
+    <div class="form-group">
+        <label for="cbStatus">Status</label>
+        <select asp-for="Status" class="form-control" id="cbStatus">
+            <option>Open</option>
+            <option>Finish</option>
+            <option>Cancel</option>
+        </select>
+    </div>
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Get Products
+    </button>
+
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/createOrder.js" asp-append-version="true"></script>
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group">
+                    <label for="txtName">Description</label>
+                    <input type="text" class="form-control" id="txtSearchProduct">
+                    <button type="button" onclick="createOrder.listProducts()" class="btn btn-primary">ADD</button>
+                </div>
+
+                    <div class="form-group">
+                        <label>Itens</label>
+                        <table id="tblItens" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="createOrder.getProductsSelected();">ADD</button>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
