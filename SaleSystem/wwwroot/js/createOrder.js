@@ -3,9 +3,9 @@
         listProducts: function () {
             //here will stay fecht
             this.products.push({ id: 1, description: 'Products 001' });
-            this.products.push({ id: 1, description: 'Products 002' });
-            this.products.push({ id: 1, description: 'Products 003' });
-            this.products.push({ id: 1, description: 'Products 004' });
+            this.products.push({ id: 2, description: 'Products 002' });
+            this.products.push({ id: 3, description: 'Products 003' });
+            this.products.push({ id: 4, description: 'Products 004' });
 
             this.products.map(p => {
                 addRow(p);
@@ -16,6 +16,8 @@
         productsSelected: [],
         idsProductsSelected: [],
         getProductsSelected: function () {
+            this.productsSelected = [];
+            this.idsProductsSelected = [];
 
             let chkboxName = 'cbSelectProduct';
             let checkboxes = document.getElementsByName(chkboxName);
