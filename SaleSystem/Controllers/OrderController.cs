@@ -54,6 +54,14 @@ namespace SaleSystem.Controllers
             }
         }
 
+        [HttpPost("Save")]
+        public JsonResult Save([FromBody] string username)
+        {
+            //var userName = input.Username;
+
+            return Json("b");
+        }
+
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
         {

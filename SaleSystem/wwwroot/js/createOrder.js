@@ -42,7 +42,7 @@ function addRowProductSelected(product) {
     btnDeleteProduct.name = 'btnDeleteProduct';
     btnDeleteProduct.id = 'btnDeleteProduct' + product.id;
     btnDeleteProduct.setAttribute("class", "btn btn-primary");
-    btnDeleteProduct.innerHTML = "Delete";  
+    btnDeleteProduct.innerHTML = "Delete";
     btnDeleteProduct.value = 'Delete';
     btnDeleteProduct.addEventListener('click', deleteRowProductSelected.bind(this, product), false);
     cellDelete.appendChild(btnDeleteProduct);
@@ -51,9 +51,9 @@ function addRowProductSelected(product) {
 
 
 function deleteRowProductSelected(product) {
-   let newProductsSelected = createOrder.productsSelected.filter(p => {
+    let newProductsSelected = createOrder.productsSelected.filter(p => {
         return p.id != product.id;
-   });
+    });
     createOrder.productsSelected = newProductsSelected;
     clearTblItensSelected();
     updateProductsSelecteds();
@@ -88,7 +88,7 @@ var createOrder = function () {
             this.products.map(p => {
                 addRowProduct(p);
             });
-           
+
         },
         products: [],
         productsSelected: [],
@@ -114,6 +114,21 @@ var createOrder = function () {
             });
 
             updateProductsSelecteds();
+        },
+        save: function () {
+
+            var url = 'Save';
+            //var username = 'example';
+
+            fetch(url, {
+                method: 'POST', // or 'PUT'
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: "Some text here" })
+            })
+                .then(res => res.json())
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .catch(error => console.error('Error:', error));
+
         }
     }
 
