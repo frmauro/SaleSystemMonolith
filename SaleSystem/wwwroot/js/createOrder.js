@@ -101,13 +101,13 @@ var createOrder = function () {
             let checkboxes = document.getElementsByName(chkboxName);
             for (let i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
-                    this.idsProductsSelected.push(checkboxes[i].value);
+                    this.idsProductsSelected.push(parseInt(checkboxes[i].value));
                 }
             }
 
             this.products.map(product => {
                 this.idsProductsSelected.map(idProduct => {
-                    if (product.id === parseInt(idProduct)) {
+                    if (product.id === idProduct) {
                         this.productsSelected.push(product);
                     }
                 });
@@ -117,16 +117,13 @@ var createOrder = function () {
         },
         save: function () {
 
-            var url = 'https://localhost:44304/order/save';
-            //var username = 'example';
-            //var data = JSON.stringify({ name: "Product 001" });
             const data = JSON.stringify({
                 id: 0,
-                description: 'order 001',
+                description: document.getElementById('txtDescription').value,
                 createDate: null,
                 changeDate: null,
-                status: '',
-                itens: [1, 2]
+                status: document.getElementById('cbStatus').value,
+                itens: this.idsProductsSelected
             });
 
 
