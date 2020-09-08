@@ -117,17 +117,34 @@ var createOrder = function () {
         },
         save: function () {
 
-            var url = 'Save';
+            var url = 'https://localhost:44304/order/save';
             //var username = 'example';
+            //var data = JSON.stringify({ name: "Product 001" });
+            const data = JSON.stringify({
+                id: 0,
+                description: 'order 001',
+                createDate: null,
+                changeDate: null,
+                status: '',
+                itens: [1, 2]
+            });
 
-            fetch(url, {
-                method: 'POST', // or 'PUT'
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: "Some text here" })
+
+            //headers: { 'Content-Type': 'application/json' },
+
+            fetch('/order/save', {
+                method: 'post', // or 'PUT'
+                body: data,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
             })
                 .then(res => res.json())
                 .then(response => console.log('Success:', JSON.stringify(response)))
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
         }
     }

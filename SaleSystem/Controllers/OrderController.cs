@@ -54,12 +54,12 @@ namespace SaleSystem.Controllers
             }
         }
 
-        [HttpPost("Save")]
-        public JsonResult Save([FromBody] string username)
+        [HttpPost]
+        public JsonResult Save([FromBody]CreateOrderViewModel vm)
         {
-            //var userName = input.Username;
+            var description = vm.Description;
 
-            return Json("b");
+            return Json(vm.Description);
         }
 
         // GET: OrderController/Edit/5
