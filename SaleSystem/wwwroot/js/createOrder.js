@@ -76,6 +76,7 @@ function clearTblItens() {
 
 
 function updateProductsSelecteds() {
+    clearTblItensSelected();
     createOrder.productsSelected.map(p => {
         addRowProductSelected(p);
     });
@@ -117,7 +118,7 @@ var createOrder = function () {
         productsSelected: [],
         idsProductsSelected: [],
         getProductsSelected: function () {
-            this.productsSelected = [];
+            //this.productsSelected = [];
             this.idsProductsSelected = [];
 
 
@@ -125,19 +126,22 @@ var createOrder = function () {
             let checkboxes = document.getElementsByName(chkboxName);
             for (let i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
-                    if (this.idsProductsSelected.indexOf(checkboxes[i].value) === -1) {
-                        this.idsProductsSelected.push(parseInt(checkboxes[i].value));
-                    }
+                    this.products.map(product => {
+                        if (product.id === parseInt(checkboxes[i].value)) {
+                            if (this.productsSelected.length > 0) {
+                                this.productsSelected.map(p => {
+                                    if (p.id != product.id) {
+                                        this.productsSelected.push(product);
+                                    }
+                                });
+                            } else {
+                                this.productsSelected.push(product);
+                            }
+                        }
+                    });
+                    //this.idsProductsSelected.push(parseInt(checkboxes[i].value));
                 }
             }
-
-            this.products.map(product => {
-                this.idsProductsSelected.map(idProduct => {
-                    if (product.id === idProduct) {
-                        this.productsSelected.push(product);
-                    }
-                });
-            });
 
             updateProductsSelecteds();
             clearTblItens();
