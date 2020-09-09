@@ -1,7 +1,8 @@
 ﻿function addRowProduct(product) {
     let tblItens = document.getElementById("tblItens");
+    let tbody = tblItens.getElementsByTagName('tbody')[0];
 
-    let newRow = tblItens.insertRow(-1);
+    let newRow = tbody.insertRow();
 
     let cellId = newRow.insertCell(0);
     let idText = document.createTextNode(product.id);
@@ -66,6 +67,13 @@ function clearTblItensSelected() {
     tbody.innerHTML = '';
 }
 
+function clearTblItens() {
+    let tblItens = document.getElementById("tblItens");
+    let tbody = tblItens.getElementsByTagName('tbody')[0];
+    tbody.innerHTML = '';
+}
+
+
 
 function updateProductsSelecteds() {
     createOrder.productsSelected.map(p => {
@@ -79,6 +87,8 @@ function updateProductsSelecteds() {
 var createOrder = function () {
     return {
         listProducts: function () {
+
+            clearTblItens();
 
             const description = JSON.stringify(document.getElementById('txtSearchProduct').value);
 
@@ -110,11 +120,14 @@ var createOrder = function () {
             this.productsSelected = [];
             this.idsProductsSelected = [];
 
+
             let chkboxName = 'cbSelectProduct';
             let checkboxes = document.getElementsByName(chkboxName);
             for (let i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
-                    this.idsProductsSelected.push(parseInt(checkboxes[i].value));
+                    if (this.idsProductsSelected.indexOf(checkboxes[i].value) === -1) {
+                        this.idsProductsSelected.push(parseInt(checkboxes[i].value));
+                    }
                 }
             }
 
@@ -127,6 +140,7 @@ var createOrder = function () {
             });
 
             updateProductsSelecteds();
+            clearTblItens();
         },
         save: function () {
 
