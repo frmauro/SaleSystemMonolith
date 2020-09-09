@@ -10,8 +10,8 @@ using SaleSystem.Repository.Context;
 namespace SaleSystem.Migrations
 {
     [DbContext(typeof(SaleContext))]
-    [Migration("20200904222111_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20200909232850_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace SaleSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

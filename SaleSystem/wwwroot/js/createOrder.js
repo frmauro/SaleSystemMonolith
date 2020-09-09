@@ -37,6 +37,10 @@ function addRowProductSelected(product) {
     let descriptionText = document.createTextNode(product.description);
     cellDescription.appendChild(descriptionText);
 
+    let cellAmount = newRow.insertCell(1);
+    let amountText = document.createTextNode(product.Amount);
+    cellAmount.appendChild(amountText);
+
     let cellDelete = newRow.insertCell(2);
     let btnDeleteProduct = document.createElement('button');
     btnDeleteProduct.type = 'button';
@@ -116,10 +120,8 @@ var createOrder = function () {
         },
         products: [],
         productsSelected: [],
-        idsProductsSelected: [],
         getProductsSelected: function () {
             //this.productsSelected = [];
-            this.idsProductsSelected = [];
 
 
             let chkboxName = 'cbSelectProduct';
@@ -139,7 +141,6 @@ var createOrder = function () {
                             }
                         }
                     });
-                    //this.idsProductsSelected.push(parseInt(checkboxes[i].value));
                 }
             }
 

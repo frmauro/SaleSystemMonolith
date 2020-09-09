@@ -12,7 +12,7 @@ namespace SaleSystem.Models
         public  string CreateDate { get; set; }
         public  string ChangeDate { get; set; }
         public  string Status { get; set; }
-        public virtual List<int> Itens { get; set; }
+        public virtual List<CreateItemOrderViewModel> Itens { get; set; }
 
     }
 }
