@@ -11,7 +11,7 @@ namespace SaleSystem.Repository
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
         private readonly SaleContext context;
-        private DbSet<T> entities;
+        protected DbSet<T> entities;
         string errorMessage = string.Empty;
 
         public Repository(SaleContext context)

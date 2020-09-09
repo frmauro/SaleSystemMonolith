@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SaleSystem.Entities.Order;
+using SaleSystem.Entities.Product;
 using SaleSystem.Models;
 using SaleSystem.Repository;
 
@@ -14,10 +15,12 @@ namespace SaleSystem.Controllers
     {
 
         private IRepository<Order> repository;
+        private IProductRepository productRepository;
 
-        public OrderController(IRepository<Order> repository)
+        public OrderController(IRepository<Order> repository, IProductRepository productRepository)
         {
             this.repository = repository;
+            this.productRepository = productRepository;
         }
 
         // GET: OrderController
@@ -53,6 +56,15 @@ namespace SaleSystem.Controllers
                 return View();
             }
         }
+
+
+        [HttpPost]
+        public JsonResult ListByDescription([FromBody]string description)
+        {
+            var products = this.productRepository.ListByDescription(description);
+            return Json(products);
+        }
+
 
         [HttpPost]
         public JsonResult Save([FromBody]CreateOrderViewModel vm)

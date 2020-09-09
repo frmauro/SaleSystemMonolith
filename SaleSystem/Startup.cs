@@ -33,6 +33,7 @@ namespace SaleSystem
 
             services.AddDbContext<SaleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
 
         }
 

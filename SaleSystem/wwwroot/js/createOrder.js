@@ -79,15 +79,28 @@ function updateProductsSelecteds() {
 var createOrder = function () {
     return {
         listProducts: function () {
-            //here will stay fecht
-            this.products.push({ id: 1, description: 'Products 001' });
-            this.products.push({ id: 2, description: 'Products 002' });
-            this.products.push({ id: 3, description: 'Products 003' });
-            this.products.push({ id: 4, description: 'Products 004' });
 
-            this.products.map(p => {
-                addRowProduct(p);
-            });
+            const description = JSON.stringify(document.getElementById('txtSearchProduct').value);
+
+            fetch('/order/ListByDescription', {
+                method: 'post', // or 'PUT'
+                body: description,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            })
+                .then(res => res.json())
+                .then(response => {
+                    this.products = response;
+                    this.products.map(p => {
+                        addRowProduct(p);
+                    });
+                    //console.log('Success:', JSON.stringify(response))
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
         },
         products: [],
