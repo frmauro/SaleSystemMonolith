@@ -38,8 +38,12 @@ function addRowProductSelected(product) {
     cellDescription.appendChild(descriptionText);
 
     let cellAmount = newRow.insertCell(2);
-    let amountText = document.createTextNode(product.amount);
-    cellAmount.appendChild(amountText);
+    let amountInputText = document.createElement('input');
+    amountInputText.type = 'text';
+    amountInputText.name = 'txtAmount';
+    amountInputText.id = 'txtAmount' + product.id;
+    amountInputText.setAttribute("class", "form-control");
+    cellAmount.appendChild(amountInputText);
 
     let cellDelete = newRow.insertCell(3);
     let btnDeleteProduct = document.createElement('button');
@@ -147,17 +151,32 @@ var createOrder = function () {
         },
         save: function () {
 
+            let tblItensSelected = document.getElementById('tblItensSelected');
+            let tbody = tblItensSelected.getElementsByTagName('tbody')[0];
+            let rows = tbody.getElementsByTagName('tr'); 
+
+            let itensSelected = [];
+
+            for (var i = 0; i < rows.length; i++) {
+                let cells = rows[i].cells;
+
+                let currentId = 'txtAmount' + cells[0].outerText;
+                let txtAmount = cells[2].getElementById(currentId);
+
+                let curentProduct = { id: cells[0].outerText, description: cells[1].outerText, amaount: cells[2].outerText }
+                itensSelected.push(curentProduct);
+            }
+
+
             const data = JSON.stringify({
                 id: 0,
                 description: document.getElementById('txtDescription').value,
                 createDate: null,
                 changeDate: null,
                 status: document.getElementById('cbStatus').value,
-                itens: this.idsProductsSelected
+                itens: itensSelected
             });
 
-
-            //headers: { 'Content-Type': 'application/json' },
 
             fetch('/order/save', {
                 method: 'post', // or 'PUT'
