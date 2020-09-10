@@ -131,11 +131,9 @@ var createOrder = function () {
                     this.products.map(product => {
                         if (product.id === parseInt(checkboxes[i].value)) {
                             if (this.productsSelected.length > 0) {
-                                this.productsSelected.map(p => {
-                                    if (p.id != product.id) {
-                                        this.productsSelected.push(product);
-                                    }
-                                });
+                                if (this.productsSelected.map(function (e) { return e.id; }).indexOf(product.id) == -1) {
+                                    this.productsSelected.push(product);
+                                }
                             } else {
                                 this.productsSelected.push(product);
                             }
