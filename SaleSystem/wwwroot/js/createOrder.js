@@ -37,11 +37,11 @@ function addRowProductSelected(product) {
     let descriptionText = document.createTextNode(product.description);
     cellDescription.appendChild(descriptionText);
 
-    let cellAmount = newRow.insertCell(1);
-    let amountText = document.createTextNode(product.Amount);
+    let cellAmount = newRow.insertCell(2);
+    let amountText = document.createTextNode(product.amount);
     cellAmount.appendChild(amountText);
 
-    let cellDelete = newRow.insertCell(2);
+    let cellDelete = newRow.insertCell(3);
     let btnDeleteProduct = document.createElement('button');
     btnDeleteProduct.type = 'button';
     btnDeleteProduct.name = 'btnDeleteProduct';
@@ -94,6 +94,7 @@ var createOrder = function () {
         listProducts: function () {
 
             clearTblItens();
+            this.products = [];
 
             const description = JSON.stringify(document.getElementById('txtSearchProduct').value);
 
@@ -111,7 +112,6 @@ var createOrder = function () {
                     this.products.map(p => {
                         addRowProduct(p);
                     });
-                    //console.log('Success:', JSON.stringify(response))
                 })
                 .catch(error => {
                     console.error('Error:', error);
