@@ -160,10 +160,10 @@ var createOrder = function () {
             for (var i = 0; i < rows.length; i++) {
                 let cells = rows[i].cells;
 
-                let currentId = 'txtAmount' + cells[0].outerText;
-                let txtAmount = cells[2].getElementById(currentId);
+                let currentId = '#txtAmount' + cells[0].outerText;
+                let txtAmount = document.querySelector(currentId);
 
-                let curentProduct = { id: cells[0].outerText, description: cells[1].outerText, amaount: cells[2].outerText }
+                let curentProduct = { id: cells[0].outerText, description: cells[1].outerText, amaount: txtAmount }
                 itensSelected.push(curentProduct);
             }
 
