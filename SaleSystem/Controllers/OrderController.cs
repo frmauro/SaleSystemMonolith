@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -67,11 +68,10 @@ namespace SaleSystem.Controllers
 
 
         [HttpPost]
-        public JsonResult Save([FromBody]CreateOrderViewModel vm)
+        public JsonResult Save([FromBody]object vm)
         {
-            var description = vm.Description;
-
-            return Json(vm.Description);
+            var createOrderViewModel = JsonSerializer.Deserialize<CreateOrderViewModel>(vm.ToString());
+            return Json(createOrderViewModel);
         }
 
         // GET: OrderController/Edit/5

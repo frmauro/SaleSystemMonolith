@@ -7,8 +7,8 @@ namespace SaleSystem.Models
 {
     public class CreateItemOrderViewModel
     {
-        public int Id { get; set; }
-        public int Amount { get; set; }
+        public string Id { get; set; }
+        public string Amount { get; set; }
 
     }
 }

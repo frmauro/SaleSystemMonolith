@@ -163,7 +163,7 @@ var createOrder = function () {
                 let currentId = '#txtAmount' + cells[0].outerText;
                 let txtAmount = document.querySelector(currentId);
 
-                let curentProduct = { id: cells[0].outerText, amount: txtAmount.value }
+                let curentProduct = { Id: cells[0].outerText, Amount: txtAmount.value }
                 itensSelected.push(curentProduct);
             }
 

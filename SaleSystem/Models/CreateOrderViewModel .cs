@@ -14,8 +14,7 @@ namespace SaleSystem.Models
         public  string ChangeDate { get; set; }
         public string Status { get; set; }
 
-        [BindProperty]
-        public  CreateItemOrderViewModel[] Itens { get; set; }
+        public  List<CreateItemOrderViewModel> Itens { get; set; }
 
     }
 }
