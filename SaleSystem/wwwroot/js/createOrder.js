@@ -163,28 +163,26 @@ var createOrder = function () {
                 let currentId = '#txtAmount' + cells[0].outerText;
                 let txtAmount = document.querySelector(currentId);
 
-                let curentProduct = { id: cells[0].outerText, description: cells[1].outerText, amaount: txtAmount }
+                let curentProduct = { id: cells[0].outerText, amount: txtAmount.value }
                 itensSelected.push(curentProduct);
             }
 
 
-            const data = JSON.stringify({
+            const data = {
                 id: 0,
-                description: document.getElementById('txtDescription').value,
-                createDate: null,
-                changeDate: null,
-                status: document.getElementById('cbStatus').value,
-                itens: itensSelected
-            });
+                Description: document.getElementById('txtDescription').value,
+                CreateDate: null,
+                ChangeDate: null,
+                Status: document.getElementById('cbStatus').value,
+                Itens: itensSelected
+            };
 
+            let body = JSON.stringify(data);
 
             fetch('/order/save', {
                 method: 'post', // or 'PUT'
-                body: data,
-                headers: {
-                    'Accept': 'application/json; charset=utf-8',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
+                body: body,
+                headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => res.json())
                 .then(response => console.log('Success:', JSON.stringify(response)))
