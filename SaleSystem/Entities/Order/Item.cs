@@ -8,10 +8,13 @@ namespace SaleSystem.Entities.Order
 {
     public class Item : EntityBase
     {
-        public virtual string Description { get; set; }
-        public virtual double Price { get; set; }
-        public virtual int Amount { get; set; }
-        public virtual Product.Product Product { get; set; }
+        public int ItemId { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public int Amount { get; set; }
+
+        public int ProductId { get; set; }
+        public Product.Product Product { get; set; }
 
     }
 }

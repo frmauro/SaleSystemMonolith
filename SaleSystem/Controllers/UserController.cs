@@ -13,9 +13,9 @@ namespace SaleSystem.Controllers
     public class UserController : Controller
     {
 
-        private IRepository<User> repository;
+        private IUserRepository repository;
 
-        public UserController(IRepository<User> repository)
+        public UserController(IUserRepository repository)
         {
             this.repository = repository;
         }
@@ -32,7 +32,7 @@ namespace SaleSystem.Controllers
                 vm = new IndexUserViewModel();
                 vm.Email = u.Name;
                 vm.Name = u.Name;
-                vm.Id = u.Id;
+                vm.Id = u.UserId;
                 vm.Password = u.Password;
                 vm.Status = u.Status.ToString();
                 vm.Type = u.Type.ToString();
@@ -89,7 +89,7 @@ namespace SaleSystem.Controllers
         {
             var vm = new EditUserViewModel();
             var user = repository.Get(id);
-            vm.Id = user.Id;
+            vm.Id = user.UserId;
             vm.Name = user.Name;
             vm.Email = user.Email;
             vm.Password = user.Password;

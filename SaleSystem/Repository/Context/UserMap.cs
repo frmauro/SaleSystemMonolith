@@ -11,7 +11,7 @@ namespace SaleSystem.Repository.Context
     {
         public UserMap(EntityTypeBuilder<User> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.Id);
+            entityBuilder.HasKey(t => t.UserId);
             entityBuilder.Property(t => t.Name);
             entityBuilder.Property(t => t.Email);
             entityBuilder.Property(t => t.Password);

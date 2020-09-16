@@ -32,8 +32,10 @@ namespace SaleSystem
             services.AddControllersWithViews();
 
             services.AddDbContext<SaleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+            services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
         }
 

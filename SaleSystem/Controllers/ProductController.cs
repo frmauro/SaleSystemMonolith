@@ -13,9 +13,9 @@ namespace SaleSystem.Controllers
     public class ProductController : Controller
     {
 
-        private IRepository<Product> repository;
+        private IProductRepository repository;
 
-        public ProductController(IRepository<Product> repository)
+        public ProductController(IProductRepository repository)
         {
             this.repository = repository;
         }
@@ -32,7 +32,7 @@ namespace SaleSystem.Controllers
                 vm = new IndexProductViewModel();
                 vm.Description = p.Description;
                 vm.Amount = p.Amount;
-                vm.Id = p.Id;
+                vm.Id = p.ProductId;
                 vm.Status = p.Status.ToString();
                 productsVM.Add(vm);
             });
@@ -81,7 +81,7 @@ namespace SaleSystem.Controllers
         {
             var vm = new EditProductViewModel();
             var product = repository.Get(id);
-            vm.Id = product.Id;
+            vm.Id = product.ProductId;
             vm.Description = product.Description;
             vm.Amount = product.Amount;
             vm.Status = product.Status.ToString();

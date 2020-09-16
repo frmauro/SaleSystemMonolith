@@ -7,11 +7,17 @@ namespace SaleSystem.Entities.Order
 {
     public class Order : EntityBase
     {
-        public virtual string Description { get; set; }
-        public virtual DateTime CreateDate { get; set; }
-        public virtual DateTime ChangeDate { get; set; }
-        public virtual IList<Item> Itens { get; set; }
-        public virtual OrderStatus Status { get; set; }
-        public virtual User.User User { get; set; }
+        public int OrderId { get; set; }
+        public string Description { get; set; }
+        public DateTime ChangeDate { get; set; }
+
+        public int ItemId { get; set; }
+        public IList<Item> Itens { get; set; }
+
+
+        public OrderStatus Status { get; set; }
+
+        public int UserId { get; set; }
+        public User.User User { get; set; }
     }
 }

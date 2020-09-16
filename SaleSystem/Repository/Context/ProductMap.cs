@@ -11,7 +11,7 @@ namespace SaleSystem.Repository.Context
     {
         public ProductMap(EntityTypeBuilder<Product> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.Id);
+            entityBuilder.HasKey(t => t.ProductId);
             entityBuilder.Property(t => t.Amount);
             entityBuilder.Property(t => t.Price);
             entityBuilder.Property(t => t.Description);

@@ -11,13 +11,14 @@ namespace SaleSystem.Repository.Context
     {
         public OrderMap(EntityTypeBuilder<Order> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.Id);
+            entityBuilder.HasKey(t => t.OrderId);
             entityBuilder.Property(t => t.Description);
             entityBuilder.Property(t => t.CreateDate);
             entityBuilder.Property(t => t.ChangeDate);
             entityBuilder.Property(t => t.Status);
             entityBuilder.Property(t => t.ChangeDate);
-            entityBuilder.HasOne(e => e.User).WithMany(e => e.Orders).HasForeignKey(e => e.Id);
+
+            entityBuilder.HasMany(i => i.Itens).WithOne();
 
         }
     }

@@ -11,7 +11,7 @@ namespace SaleSystem.Repository.Context
     {
         public ItemMap(EntityTypeBuilder<Item> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.Id);
+            entityBuilder.HasKey(t => t.ItemId);
             entityBuilder.Property(t => t.Description);
             entityBuilder.Property(t => t.Amount);
             entityBuilder.Property(t => t.Price);

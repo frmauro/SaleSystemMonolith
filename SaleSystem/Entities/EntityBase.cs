@@ -7,6 +7,6 @@ namespace SaleSystem.Entities
 {
     public class EntityBase
     {
-        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

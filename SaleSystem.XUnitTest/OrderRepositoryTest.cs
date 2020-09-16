@@ -62,17 +62,17 @@ namespace SaleSystem.XUnitTest
                     Price = 130.0 + (i + 2)
                 };
                 Itens.Add(item);
-                
+
                 order = new Order
                 {
-                    Description = string.Concat("Order", i),
+                    Description = string.Concat("OrderTest", i),
                     Status = OrderStatus.Open,
                     CreateDate = DateTime.Now,
                     User = user,
                     Itens = Itens
                 };
 
-                repository.Insert(order);
+               repository.Insert(order);
             }
 
         }

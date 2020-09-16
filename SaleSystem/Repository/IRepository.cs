@@ -9,7 +9,7 @@ namespace SaleSystem.Repository
     public interface IRepository<T> where T : EntityBase
     {
         IEnumerable<T> GetAll();
-        T Get(long id);
+        //T Get(long id);
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);

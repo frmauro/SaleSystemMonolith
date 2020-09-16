@@ -30,10 +30,10 @@ namespace SaleSystem.Repository
             context.SaveChanges();
         }
 
-        public T Get(long id)
-        {
-            return entities.SingleOrDefault(s => s.Id == id);
-        }
+        //public T Get(long id)
+        //{
+        //    return entities.SingleOrDefault(s => s.Id == id);
+        //}
 
         public IEnumerable<T> GetAll()
         {
