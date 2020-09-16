@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SaleSystem.Entities.Order;
 using SaleSystem.Entities.Product;
+using SaleSystem.Entities.User;
 using SaleSystem.Models;
 using SaleSystem.Repository;
 
@@ -17,11 +18,13 @@ namespace SaleSystem.Controllers
 
         private IRepository<Order> repository;
         private IProductRepository productRepository;
+        private IRepository<User> userRepository;
 
-        public OrderController(IRepository<Order> repository, IProductRepository productRepository)
+        public OrderController(IRepository<Order> repository, IProductRepository productRepository, IRepository<User> userRepository)
         {
             this.repository = repository;
             this.productRepository = productRepository;
+            this.userRepository = userRepository;
         }
 
         // GET: OrderController
@@ -71,7 +74,10 @@ namespace SaleSystem.Controllers
         public JsonResult Save([FromBody]object vm)
         {
             var createOrderViewModel = JsonSerializer.Deserialize<CreateOrderViewModel>(vm.ToString());
-            return Json(createOrderViewModel);
+            var entity = ConvertVmToEntity(createOrderViewModel);
+            this.repository.Insert(entity);
+
+            return Json("OK");
         }
 
         // GET: OrderController/Edit/5
@@ -114,6 +120,44 @@ namespace SaleSystem.Controllers
             {
                 return View();
             }
+        }
+
+
+        private Order ConvertVmToEntity(CreateOrderViewModel vm)
+        {
+
+            var itens = new List<Item>();
+            vm.Itens.ForEach(v => {
+                var idProduct = Convert.ToInt32(v.Id);
+                var product = this.productRepository.Get(idProduct);
+                var item = new Item
+                {
+                    Amount = Convert.ToInt32(v.Amount),
+                    Description = product.Description,
+                    Product = product,
+                    Price = product.Price
+                };
+                itens.Add(item);
+            });
+            var user = this.userRepository.GetAll().FirstOrDefault();
+            var order = new Order
+            {
+                Description = vm.Description,
+                CreateDate = DateTime.Now,
+                User = user,
+                Itens = itens
+            };
+
+            if (vm.Status == "Open")
+                order.Status = OrderStatus.Open;
+
+            if (vm.Status == "Finish")
+                order.Status = OrderStatus.Finish;
+
+            if (vm.Status == "Cancel")
+                order.Status = OrderStatus.Cancel;
+
+            return order;
         }
     }
 }

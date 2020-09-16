@@ -10,7 +10,7 @@ using SaleSystem.Repository.Context;
 namespace SaleSystem.Migrations
 {
     [DbContext(typeof(SaleContext))]
-    [Migration("20200909232850_InitialCreate")]
+    [Migration("20200916182333_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,11 +37,11 @@ namespace SaleSystem.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
-
-                    b.Property<double>("Valor")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -86,6 +86,9 @@ namespace SaleSystem.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

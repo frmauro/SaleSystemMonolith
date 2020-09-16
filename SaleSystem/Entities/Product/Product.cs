@@ -10,6 +10,8 @@ namespace SaleSystem.Entities.Product
     {
         public virtual string Description { get; set; }
         public virtual int Amount { get; set; }
+        public virtual double Price { get; set; }
+
         public virtual ProductStatus Status { get; set; }
 
     }

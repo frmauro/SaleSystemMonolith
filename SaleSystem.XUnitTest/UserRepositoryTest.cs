@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SaleSystem.Entities.Product;
+using SaleSystem.Entities.User;
 using SaleSystem.Repository;
 using SaleSystem.Repository.Context;
 using System;
@@ -8,12 +9,12 @@ using Xunit;
 
 namespace SaleSystem.XUnitTest
 {
-    public class ProductRepositoryTest
+    public class UserRepositoryTest
     {
-        IProductRepository repository;
+        IRepository<User> repository;
         SaleContext context;
 
-        public ProductRepositoryTest()
+        public UserRepositoryTest()
         {
 
             var serviceProvider = new ServiceCollection()
@@ -26,9 +27,7 @@ namespace SaleSystem.XUnitTest
                     .UseInternalServiceProvider(serviceProvider);
 
             context = new SaleContext(builder.Options);
-            //_context.Database.Migrate();
-
-            repository = new ProductRepository(context);
+            repository = new Repository<User>(context);
         }
 
 
@@ -36,20 +35,27 @@ namespace SaleSystem.XUnitTest
         public void Save_Test()
         {
 
-            Product product = null;
-
-            for (var i = 0; i < 100; i++)
+            var user01 = new User
             {
-                product = new Product
-                {
-                    Amount = 10 + i,
-                    Description = string.Concat("Product", i),
-                    Price = 100 + (i + 1),
-                    Status = ProductStatus.Active
-                };
+                Email = "frmauro8@gmail.com",
+                Name = "Francisco Mauro",
+                Password = "123",
+                Type = TypeUser.Administrator,
+                Status = UserStatus.Active
+            };
 
-                repository.Insert(product);
-            }
+            repository.Insert(user01);
+
+            var user02 = new User
+            {
+                Email = "jml@gmail.com",
+                Name = "João Mauro",
+                Password = "123",
+                Type = TypeUser.Client,
+                Status = UserStatus.Active
+            };
+
+            repository.Insert(user02);
 
         }
     }

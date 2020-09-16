@@ -15,6 +15,7 @@ namespace SaleSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -67,7 +68,7 @@ namespace SaleSystem.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true),
-                    Valor = table.Column<double>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     Amount = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: true),
                     OrderId = table.Column<int>(nullable: true)

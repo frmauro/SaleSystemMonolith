@@ -9,7 +9,7 @@ namespace SaleSystem.Entities.Order
     public class Item : EntityBase
     {
         public virtual string Description { get; set; }
-        public virtual double Valor { get; set; }
+        public virtual double Price { get; set; }
         public virtual int Amount { get; set; }
         public virtual Product.Product Product { get; set; }
 

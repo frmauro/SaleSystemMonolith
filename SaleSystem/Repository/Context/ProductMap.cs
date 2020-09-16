@@ -13,6 +13,7 @@ namespace SaleSystem.Repository.Context
         {
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Amount);
+            entityBuilder.Property(t => t.Price);
             entityBuilder.Property(t => t.Description);
             entityBuilder.Property(t => t.Status);
         }

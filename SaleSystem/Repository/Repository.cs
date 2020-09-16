@@ -46,6 +46,7 @@ namespace SaleSystem.Repository
             {
                 throw new ArgumentNullException("entity");
             }
+
             entities.Add(entity);
             context.SaveChanges();
         }

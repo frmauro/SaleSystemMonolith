@@ -35,11 +35,11 @@ namespace SaleSystem.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
-
-                    b.Property<double>("Valor")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -84,6 +84,9 @@ namespace SaleSystem.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
