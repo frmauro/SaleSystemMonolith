@@ -16,11 +16,11 @@ namespace SaleSystem.Controllers
     public class OrderController : Controller
     {
 
-        private IRepository<Order> repository;
+        private IOrderRepository repository;
         private IProductRepository productRepository;
-        private IRepository<User> userRepository;
+        private IUserRepository userRepository;
 
-        public OrderController(IRepository<Order> repository, IProductRepository productRepository, IRepository<User> userRepository)
+        public OrderController(IOrderRepository repository, IProductRepository productRepository, IUserRepository userRepository)
         {
             this.repository = repository;
             this.productRepository = productRepository;
@@ -30,7 +30,18 @@ namespace SaleSystem.Controllers
         // GET: OrderController
         public ActionResult Index()
         {
-            return View();
+            var list = new List<IndexOrderViewModel>();
+            var orders =  repository.GetAll();
+            orders.ToList().ForEach(o => {
+                var vm = new IndexOrderViewModel();
+                vm.Id = o.OrderId;
+                vm.Description = o.Description;
+                vm.Status = o.Status.ToString();
+                list.Add(vm);
+            });
+
+
+            return View(list);
         }
 
         // GET: OrderController/Details/5
