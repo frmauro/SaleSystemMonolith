@@ -5,7 +5,7 @@
     let newRow = tbody.insertRow();
 
     let cellId = newRow.insertCell(0);
-    let idText = document.createTextNode(product.id);
+    let idText = document.createTextNode(product.productId);
     cellId.appendChild(idText);
 
     let cellDescription = newRow.insertCell(1);
@@ -16,8 +16,8 @@
     let cbSelectProduct = document.createElement('input');
     cbSelectProduct.type = 'checkbox';
     cbSelectProduct.name = 'cbSelectProduct';
-    cbSelectProduct.id = 'ptworkinfo' + product.id;
-    cbSelectProduct.value = product.id;
+    cbSelectProduct.id = 'ptworkinfo' + product.productId;
+    cbSelectProduct.value = product.productId;
 
     cellDelete.appendChild(cbSelectProduct);
 }
@@ -30,7 +30,7 @@ function addRowProductSelected(product) {
     let newRow = tbody.insertRow();
 
     let cellId = newRow.insertCell(0);
-    let idText = document.createTextNode(product.id);
+    let idText = document.createTextNode(product.productId);
     cellId.appendChild(idText);
 
     let cellDescription = newRow.insertCell(1);
@@ -41,7 +41,7 @@ function addRowProductSelected(product) {
     let amountInputText = document.createElement('input');
     amountInputText.type = 'text';
     amountInputText.name = 'txtAmount';
-    amountInputText.id = 'txtAmount' + product.id;
+    amountInputText.id = 'txtAmount' + product.productId;
     amountInputText.setAttribute("class", "form-control");
     cellAmount.appendChild(amountInputText);
 
@@ -49,7 +49,7 @@ function addRowProductSelected(product) {
     let btnDeleteProduct = document.createElement('button');
     btnDeleteProduct.type = 'button';
     btnDeleteProduct.name = 'btnDeleteProduct';
-    btnDeleteProduct.id = 'btnDeleteProduct' + product.id;
+    btnDeleteProduct.id = 'btnDeleteProduct' + product.productId;
     btnDeleteProduct.setAttribute("class", "btn btn-primary");
     btnDeleteProduct.innerHTML = "Delete";
     btnDeleteProduct.value = 'Delete';
@@ -61,7 +61,7 @@ function addRowProductSelected(product) {
 
 function deleteRowProductSelected(product) {
     let newProductsSelected = createOrder.productsSelected.filter(p => {
-        return p.id != product.id;
+        return p.id != product.productId;
     });
     createOrder.productsSelected = newProductsSelected;
     clearTblItensSelected();
@@ -133,9 +133,9 @@ var createOrder = function () {
             for (let i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
                     this.products.map(product => {
-                        if (product.id === parseInt(checkboxes[i].value)) {
+                        if (product.productId === parseInt(checkboxes[i].value)) {
                             if (this.productsSelected.length > 0) {
-                                if (this.productsSelected.map(function (e) { return e.id; }).indexOf(product.id) == -1) {
+                                if (this.productsSelected.map(function (e) { return e.productId; }).indexOf(product.productId) == -1) {
                                     this.productsSelected.push(product);
                                 }
                             } else {

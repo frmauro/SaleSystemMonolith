@@ -31,8 +31,9 @@ namespace SaleSystem.Controllers
         public ActionResult Index()
         {
             var list = new List<IndexOrderViewModel>();
-            var orders =  repository.GetAll();
-            orders.ToList().ForEach(o => {
+            var orders = repository.GetAll();
+            orders.ToList().ForEach(o =>
+            {
                 var vm = new IndexOrderViewModel();
                 vm.Id = o.OrderId;
                 vm.Description = o.Description;
@@ -74,7 +75,7 @@ namespace SaleSystem.Controllers
 
 
         [HttpPost]
-        public JsonResult ListByDescription([FromBody]string description)
+        public JsonResult ListByDescription([FromBody] string description)
         {
             var products = this.productRepository.ListByDescription(description);
             return Json(products);
@@ -82,7 +83,7 @@ namespace SaleSystem.Controllers
 
 
         [HttpPost]
-        public JsonResult Save([FromBody]object vm)
+        public JsonResult Save([FromBody] object vm)
         {
             var createOrderViewModel = JsonSerializer.Deserialize<CreateOrderViewModel>(vm.ToString());
             var entity = ConvertVmToEntity(createOrderViewModel);
@@ -94,7 +95,13 @@ namespace SaleSystem.Controllers
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var vm = new EditOrderViewModel();
+            var entity = this.repository.Get(id);
+            vm.Id = entity.OrderId;
+            vm.Description = entity.Description;
+            vm.CurrentStatus = entity.Status.ToString();
+
+            return View(vm);
         }
 
         // POST: OrderController/Edit/5
@@ -104,6 +111,19 @@ namespace SaleSystem.Controllers
         {
             try
             {
+                var entity = this.repository.Get(id);
+                var status = collection["status"].ToString();
+
+                if (status == "Open")
+                    entity.Status = OrderStatus.Open;
+
+                if (status == "Finish")
+                    entity.Status = OrderStatus.Finish;
+
+                if (status == "Cancel")
+                    entity.Status = OrderStatus.Cancel;
+
+                this.repository.Update(entity);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -138,7 +158,8 @@ namespace SaleSystem.Controllers
         {
 
             var itens = new List<Item>();
-            vm.Itens.ForEach(v => {
+            vm.Itens.ForEach(v =>
+            {
                 var idProduct = Convert.ToInt32(v.Id);
                 var product = this.productRepository.Get(idProduct);
                 var item = new Item
