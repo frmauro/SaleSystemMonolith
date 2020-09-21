@@ -6,7 +6,7 @@
 
 <h1>Create Order</h1>
 
-<form>
+<form onload="createOrder.load();">
     <div class="form-group">
         <label for="txtName">Description</label>
         <input asp-for="Description" type="text" class="form-control" id="txtDescription">
@@ -27,23 +27,31 @@
     </div>
 
 
-        <div class="form-group">
-            <label>Itens</label>
-            <table id="tblItensSelected" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+    <div class="form-group">
+        <label>Itens</label>
+        <table id="tblItensSelected" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
+    <div class="form-group">
         <button type="button" class="btn btn-primary" onclick="createOrder.save();">Save</button>
+    </div>
+    <div class="form-group">
+        <div class="alert alert-danger" id="msgAlert" role="alert">
+        </div>
+        <div class="alert alert-success" id="msgSuccess" role="alert">
+        </div>
+    </div>
 </form>
 
 @section Scripts {
@@ -72,30 +80,30 @@
                     <button type="button" onclick="createOrder.listProducts()" class="btn btn-primary">Search</button>
                 </div>
 
-                    <div class="form-group">
-                        <label>Itens</label>
-                        <table id="tblItens" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-
+                <div class="form-group">
+                    <label>Itens</label>
+                    <table id="tblItens" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createOrder.getProductsSelected();">ADD</button>
-                </div>
+
+
+
+
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createOrder.getProductsSelected();">ADD</button>
+            </div>
+        </div>
     </div>
 </div>
 

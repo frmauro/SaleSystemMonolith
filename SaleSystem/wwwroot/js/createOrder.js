@@ -1,4 +1,5 @@
-﻿function addRowProduct(product) {
+﻿
+function addRowProduct(product) {
     let tblItens = document.getElementById("tblItens");
     let tbody = tblItens.getElementsByTagName('tbody')[0];
 
@@ -185,15 +186,49 @@ var createOrder = function () {
                 headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => res.json())
-                .then(response => console.log('Success:', JSON.stringify(response)))
+                .then(response => {
+
+                    if (response != "OK") {
+                        var msgAlert = document.getElementById("msgAlert");
+                        msgAlert.style = "display:block";
+                        msgAlert.innerHTML = response;
+
+                        var msgSuccess = document.getElementById("msgSuccess");
+                        msgSuccess.style = "display:none";
+                    } else {
+                        var msgAlert = document.getElementById("msgAlert");
+                        msgAlert.style = "display:none";
+                        msgAlert.innerHTML = "";
+
+                        var msgSuccess = document.getElementById("msgSuccess");
+                        msgSuccess.style = "display:block";
+                        msgSuccess.innerHTML = "Operation performed successfully";
+                    }
+
+                    //console.log('Success:', JSON.stringify(response))
+                })
                 .catch(error => {
                     console.error('Error:', error);
                 });
 
+        },
+        load: function () {
+            //alert('loading...');
+            var msgAlert = document.getElementById("msgAlert");
+            msgAlert.style = "display:none";
+
+            var msgSuccess = document.getElementById("msgSuccess");
+            msgSuccess.style = "display:none";
         }
     }
 
 }();
+
+
+window.addEventListener("load", function (event) {
+    createOrder.load();
+});
+
 
 
 

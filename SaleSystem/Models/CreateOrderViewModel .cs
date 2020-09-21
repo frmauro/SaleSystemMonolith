@@ -13,6 +13,7 @@ namespace SaleSystem.Models
         public  string CreateDate { get; set; }
         public  string ChangeDate { get; set; }
         public string Status { get; set; }
+        public string Message { get; set; }
 
         public  List<CreateItemOrderViewModel> Itens { get; set; }
 

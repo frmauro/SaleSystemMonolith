@@ -86,10 +86,23 @@ namespace SaleSystem.Controllers
         public JsonResult Save([FromBody] object vm)
         {
             var createOrderViewModel = JsonSerializer.Deserialize<CreateOrderViewModel>(vm.ToString());
+            var result = string.Empty;
             var entity = ConvertVmToEntity(createOrderViewModel);
-            this.repository.Insert(entity);
+            if (string.IsNullOrEmpty(createOrderViewModel.Message))
+            {
+                this.repository.Insert(entity);
+                //update amount products
+                entity.Itens.ToList().ForEach(i => {
+                    var currentProduct = this.productRepository.Get(i.Product.ProductId);
+                    currentProduct.Amount -= i.Amount;
+                    this.productRepository.Update(currentProduct);
+                });
 
-            return Json("OK");
+                result = "OK";
+            }
+            else
+                result = createOrderViewModel.Message;
+            return Json(result);
         }
 
         // GET: OrderController/Edit/5
@@ -156,20 +169,27 @@ namespace SaleSystem.Controllers
 
         private Order ConvertVmToEntity(CreateOrderViewModel vm)
         {
-
             var itens = new List<Item>();
             vm.Itens.ForEach(v =>
             {
                 var idProduct = Convert.ToInt32(v.Id);
                 var product = this.productRepository.Get(idProduct);
-                var item = new Item
+
+                var currentAmount = Convert.ToInt32(v.Amount);
+                if (currentAmount > product.Amount)
+                    vm.Message += $"The product amount: {product.Description}/ ID:{product.ProductId} is bigger than the stock  /  ";
+                else
                 {
-                    Amount = Convert.ToInt32(v.Amount),
-                    Description = product.Description,
-                    Product = product,
-                    Price = product.Price
-                };
-                itens.Add(item);
+                    var item = new Item
+                    {
+                        Amount = currentAmount,
+                        Description = product.Description,
+                        Product = product,
+                        Price = product.Price
+                    };
+                    itens.Add(item);
+                }
+
             });
             var user = this.userRepository.GetAll().FirstOrDefault();
             var order = new Order
