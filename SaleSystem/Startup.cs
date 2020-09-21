@@ -31,6 +31,8 @@ namespace SaleSystem
 
             services.AddControllersWithViews();
 
+            services.AddSession();
+
             services.AddDbContext<SaleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
@@ -54,6 +56,8 @@ namespace SaleSystem
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

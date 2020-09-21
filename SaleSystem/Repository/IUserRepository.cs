@@ -16,5 +16,6 @@ namespace SaleSystem.Repository
         public void Insert(User entity);
         public void Update(User entity);
         IEnumerable<User> ListByName(string name);
+        User GetByEmailAndByPassword(string email, string password);
     }
 }

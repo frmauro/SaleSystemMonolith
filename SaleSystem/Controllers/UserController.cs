@@ -10,7 +10,7 @@ using SaleSystem.Repository;
 
 namespace SaleSystem.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
 
         private IUserRepository repository;

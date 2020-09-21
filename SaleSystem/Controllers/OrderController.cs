@@ -13,7 +13,7 @@ using SaleSystem.Repository;
 
 namespace SaleSystem.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
 
         private IOrderRepository repository;
