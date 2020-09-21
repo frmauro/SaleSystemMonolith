@@ -68,5 +68,11 @@ namespace SaleSystem.Repository
         {
             return this.entities.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
         }
+
+        public User GetByEmail(string email)
+        {
+            return this.entities.Where(x => x.Email == email).FirstOrDefault();
+        }
+
     }
 }

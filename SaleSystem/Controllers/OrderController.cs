@@ -191,7 +191,8 @@ namespace SaleSystem.Controllers
                 }
 
             });
-            var user = this.userRepository.GetAll().FirstOrDefault();
+            var email = HttpContext.Session.GetString("user");
+            var user = this.userRepository.GetByEmail(email);
             var order = new Order
             {
                 Description = vm.Description,
