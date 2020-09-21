@@ -18,11 +18,11 @@ namespace SaleSystem.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            //base.OnActionExecuting(context);
             var valueUserSession = HttpContext.Session.GetString("user");
 
             if (string.IsNullOrEmpty(valueUserSession))
                 context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Logon" } });
+            base.OnActionExecuting(context);
         }
 
     }

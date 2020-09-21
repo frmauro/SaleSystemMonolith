@@ -10,7 +10,7 @@ using SaleSystem.Repository;
 
 namespace SaleSystem.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
 
         private IProductRepository repository;
